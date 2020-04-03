@@ -8,6 +8,10 @@ var holder,ball,ground;
 var stand1,stand2;
 var ball;
 var slingShot;
+var polygon_img;
+function preload(){
+  polygon_img=loadImage("polygon.png");
+}
 function setup() {
   createCanvas(900,400);
   engine = Engine.create();
@@ -92,7 +96,7 @@ function draw() {
   block13.display();
   block14.display();
   block15.display();
-  fill("lightgrey");
+  fill("grey");
   block16.display();
   fill("skyblue");
   blocks1.display();
@@ -107,8 +111,8 @@ function draw() {
   fill("pink")
   blocks9.display();
   fill("gold");
-  ellipseMode(RADIUS);
-  ellipse(ball.position.x,ball.position.y,20,20);
+  imageMode(CENTER)
+  image(polygon_img ,ball.position.x,ball.position.y,40,40);
 
   slingShot.display();
 }
