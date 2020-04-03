@@ -12,12 +12,14 @@ function setup() {
   createCanvas(900,400);
   engine = Engine.create();
   world = engine.world;
-
+  Engine.run(engine);
   ground = new Ground();
   stand1 = new Stand(390,300,250,10);
   stand2 = new Stand(700,200,200,10);
+ 
   //level one
   block1 = new Block(300,275,30,40);
+  console.log(block1);
   block2 = new Block(330,275,30,40);
   block3 = new Block(360,275,30,40);
   block4 = new Block(390,275,30,40);
@@ -55,13 +57,18 @@ function setup() {
   ball = Bodies.circle(50,200,20);
   World.add(world,ball);
 
-  slingShot = new Slingshot(this.ball,{x:50,y:200});
+  slingShot = new Slingshot(this.ball,{x:100,y:200});
 
 }
 function draw() {
   background(56,44,44); 
-  Engine.update(engine);
-  text(mouseX + ',' + mouseY, 10, 15);
+ 
+  //Engine.update(engine);
+  //text(mouseX + ',' + mouseY, 10, 15);
+  textSize(20);
+  fill("lightyellow");
+  text("Drag the ball to destroy the blocks",300,30);
+
   ground.display();
   stand1.display();
   stand2.display();
@@ -85,7 +92,7 @@ function draw() {
   block13.display();
   block14.display();
   block15.display();
-  fill("gold");
+  fill("lightgrey");
   block16.display();
   fill("skyblue");
   blocks1.display();
@@ -99,7 +106,7 @@ function draw() {
   blocks8.display();
   fill("pink")
   blocks9.display();
-
+  fill("gold");
   ellipseMode(RADIUS);
   ellipse(ball.position.x,ball.position.y,20,20);
 
@@ -107,4 +114,7 @@ function draw() {
 }
 function mouseDragged(){
   Matter.Body.setPosition(this.ball,{x:mouseX,y:mouseY});
+}
+function mouseReleased(){
+  slingShot.fly();
 }
