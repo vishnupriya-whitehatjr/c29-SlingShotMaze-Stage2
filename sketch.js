@@ -6,6 +6,8 @@ const Constraint = Matter.Constraint;
 var engine, world;
 var holder,ball,ground;
 var stand1,stand2;
+var ball;
+var slingShot;
 function setup() {
   createCanvas(900,400);
   engine = Engine.create();
@@ -49,9 +51,15 @@ function setup() {
   //top
   blocks9 = new Block(700,95,30,40);
 
+  //ball holder with slings
+  ball = Bodies.circle(50,200,20);
+  World.add(world,ball);
+
+  slingShot = new Slingshot(this.ball,{x:50,y:200});
+
 }
 function draw() {
-  background("black"); 
+  background(56,44,44); 
   Engine.update(engine);
   text(mouseX + ',' + mouseY, 10, 15);
   ground.display();
@@ -91,4 +99,12 @@ function draw() {
   blocks8.display();
   fill("pink")
   blocks9.display();
+
+  ellipseMode(RADIUS);
+  ellipse(ball.position.x,ball.position.y,20,20);
+
+  slingShot.display();
+}
+function mouseDragged(){
+  Matter.Body.setPosition(this.ball,{x:mouseX,y:mouseY});
 }
